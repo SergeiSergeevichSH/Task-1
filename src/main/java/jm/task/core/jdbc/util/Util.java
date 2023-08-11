@@ -15,29 +15,18 @@ public class Util {
     private static final String LOGIN = "root";
     private static final String PASSWORD = "1234";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String AUTOCOMMIT = "false";
     private static Connection connection;
-    private static SessionFactory factory = null;
-
-
-    public static SessionFactory getFactory() {
-        if (factory == null) {
-            try {
-                Properties properties = new Properties();
-                properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-                properties.put(Environment.DRIVER, DRIVER);
-                properties.put(Environment.URL, URL);
-                properties.put(Environment.USER, LOGIN);
-                properties.put(Environment.PASS, PASSWORD);
-                properties.put(Environment.AUTOCOMMIT, "true");
-                Configuration cfg = new Configuration()
-                        .setProperties(properties)
-                        .addAnnotatedClass(jm.task.core.jdbc.model.User.class);
-                factory = cfg.buildSessionFactory();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+public static Connection getConnection() {
+        try {
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
         }
-        return factory;
+        catch (SQLException e) {
+            System.out.println("Не удалось установить соединение c БД" + e);
+        }
+        catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return connection;
     }
 }
