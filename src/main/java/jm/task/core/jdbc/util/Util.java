@@ -11,12 +11,9 @@ import java.util.Properties;
 
 public class Util {
     // реализуйте настройку соеденения с БД
-//    private static final String URL = "jdbc:postgresql://localhost:5432/test_db";
     private static final String URL = "jdbc:mysql://localhost:3306/test_db";
-//    private static final String LOGIN = "postgres";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "1234";
-//    private static final String DRIVER = "org.postgresql.Driver";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String AUTOCOMMIT = "false";
     private static Connection connection;
@@ -45,9 +42,7 @@ public class Util {
                 properties.put(Environment.URL, URL);
                 properties.put(Environment.USER, LOGIN);
                 properties.put(Environment.PASS, PASSWORD);
-//                properties.put(Environment.PASS, PASSWORD);
-                // Добавляем параметр для вывода SQL-запросов в лог
-//                properties.put(Environment.AUTOCOMMIT, "true");
+                properties.put(Environment.AUTOCOMMIT, "true");
                 Configuration cfg = new Configuration()
                         .setProperties(properties)
                         .addAnnotatedClass(jm.task.core.jdbc.model.User.class);
@@ -55,7 +50,6 @@ public class Util {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         return factory;
     }

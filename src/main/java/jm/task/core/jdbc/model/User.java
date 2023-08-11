@@ -7,23 +7,19 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//автогенерация значеия поля id
-    //    @Column (name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //автогенерация значеия поля id
     private Long id;
 
-//    @Column (name = "name", nullable = true, length = 3)
     @Column
     private String name;
 
-//    @Column(name = "lastname", nullable = false, length = 50)
     @Column
     private String lastName;
 
-//    @Column(name = "age",nullable = false, length = 3)
     @Column
     private Byte age;
 
-//    public User(String name, String lastName, Byte age) {
     public User(String name, String lastName, Byte age) {
         this.name = name;
         this.lastName = lastName;
