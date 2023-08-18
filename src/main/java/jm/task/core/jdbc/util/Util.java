@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -42,10 +43,10 @@ public class Util {
                 properties.put(Environment.URL, URL);
                 properties.put(Environment.USER, LOGIN);
                 properties.put(Environment.PASS, PASSWORD);
-                properties.put(Environment.AUTOCOMMIT, "true");
+//                properties.put(Environment.AUTOCOMMIT, "true");
                 Configuration cfg = new Configuration()
                         .setProperties(properties)
-                        .addAnnotatedClass(jm.task.core.jdbc.model.User.class);
+                        .addAnnotatedClass(User.class);
                 factory = cfg.buildSessionFactory();
             } catch (Exception e) {
                 e.printStackTrace();
